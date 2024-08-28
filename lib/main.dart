@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Localization support
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart'; // Package for dependency injection
 import 'package:magicminds_assignment/repository/product_api/auth_repository.dart';
 
+import 'configs/localization/localization_config.dart';
 import 'configs/routes/routes.dart'; // Custom routes
 import 'configs/routes/routes_name.dart'; // Route names
-import 'configs/themes/dark_theme.dart'; // Dark theme configuration
-import 'configs/themes/light_theme.dart'; // Light theme configuration
+import 'configs/themes/light_theme.dart'; // Dark theme configuration
+import 'configs/themes/dark_theme.dart'; // Light theme configuration
 
 // GetIt is a package used for service locator or to manage dependency injection
 GetIt getIt = GetIt.instance;
@@ -30,24 +30,19 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark, // Setting theme mode to dark
       theme: lightTheme, // Setting light theme
       darkTheme: darkTheme, // Setting dark theme
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), // English locale
-        Locale('hi'), // Hindi locale
-        Locale('bn'), // Bengali locale
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: RoutesName.product, // Initial route
       onGenerateRoute: Routes.generateRoute, // Generating routes
+      builder: (context, child) => SizedBox( //Settings a parent widget with a key so that localization access can be achieved conveniently.
+        key: navigatorKey,
+        child: child,
+      ),
     );
   }
 }
 
 // Function for initializing service locator
 void servicesLocator() {
-  getIt.registerLazySingleton<ProductApiRepository>(() => ProductHttpApiRepository()); // Registering AuthHttpApiRepository as a lazy singleton for AuthApiRepository
+  getIt.registerLazySingleton<ProductApiRepository>(() => ProductMockApiRepository()); // Registering ProductHttpApiRepository as a lazy singleton for ProductApiRepository
 }
