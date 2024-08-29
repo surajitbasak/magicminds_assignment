@@ -24,3 +24,11 @@ class GetMoreProductsEvent extends ProductEvent {
   @override
   List<Object?> get props => [limit];
 }
+
+class SearchProductEvent extends ProductEvent {
+  const SearchProductEvent({required this.query});
+
+  final String query;
+  @override
+  List<Object?> get props => [];
+}

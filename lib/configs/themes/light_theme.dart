@@ -1,51 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'themes.dart';
 
-ThemeData darkTheme = ThemeData.dark().copyWith(
-    appBarTheme: AppBarTheme(
-        toolbarTextStyle: ThemeData.light().textTheme.displayMedium!.copyWith(fontFamily: ThemeConfig.pangramRegular, color: Colors.white, fontWeight: FontWeight.w500),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        )),
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.white),
-    textTheme: ThemeData.dark().textTheme.copyWith(
-          titleMedium: GoogleFonts.roboto(color: Colors.white),
-          titleSmall: GoogleFonts.roboto(
-            color: Colors.white.withOpacity(.5),
-          ),
-          displayLarge: GoogleFonts.roboto(
-            color: Colors.white,
-          ),
-          displayMedium: GoogleFonts.roboto(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-          headlineMedium: GoogleFonts.roboto(
-            color: ThemeConfig.textColor6B698E,
-          ),
-          displaySmall: GoogleFonts.roboto(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-          bodyMedium: GoogleFonts.roboto(
-            color: ThemeConfig.textColorBCBFC2,
-          ),
-        ),
-    radioTheme: RadioThemeData(
-      fillColor: MaterialStateColor.resolveWith((states) => Colors.white.withOpacity(.3)),
+ThemeData lightTheme = ThemeData.light().copyWith(
+  appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      )),
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+      secondary: const Color(0xffa1a1a1),
+      primary: const Color(0xff0F0425),
+      onPrimary: const Color(0xff9694B8),
+      outline: const Color(0xfff0f0f0),
+      onBackground: const Color(0xfff6f8f8),
+      background: const Color(0xffDCE8E8),
+      primaryContainer: Colors.white,
+      onPrimaryContainer: const Color(0xffd8d8da)),
+  textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.black),
+  scaffoldBackgroundColor: Colors.white,
+  progressIndicatorTheme: const ProgressIndicatorThemeData(linearTrackColor: Color(0xffECEAEA), color: ThemeConfig.primaryColor),
+  primaryColor: ThemeConfig.primaryColor,
+  radioTheme: RadioThemeData(
+    fillColor: MaterialStateColor.resolveWith(
+      (states) => Colors.black.withOpacity(.4),
     ),
-    colorScheme: const ColorScheme.dark().copyWith(
-        secondary: const Color(0xff73777a),
-        primary: Colors.white,
-        onPrimary: const Color(0xffA0A0A0),
-        outline: Colors.black,
-        onBackground: const Color(0xff202934),
-        brightness: Brightness.dark,
-        background: const Color(0xff202934),
-        primaryContainer: const Color(0xff2d3236),
-        onPrimaryContainer: const Color(0xff5a5f62)),
-    progressIndicatorTheme: const ProgressIndicatorThemeData(linearTrackColor: Colors.white, color: ThemeConfig.primaryColor),
-    primaryColor: ThemeConfig.primaryColor,
-    scaffoldBackgroundColor: ThemeConfig.darkBackColor);
+  ),
+  textTheme: ThemeData.light().textTheme.copyWith(
+        titleMedium: GoogleFonts.roboto(color: Colors.black),
+        titleSmall: GoogleFonts.roboto(
+          color: Colors.black.withOpacity(.5),
+        ),
+        displayLarge: GoogleFonts.roboto(
+          color: Colors.black,
+        ),
+        displayMedium: GoogleFonts.roboto(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+        ),
+        headlineMedium: GoogleFonts.roboto(
+          color: ThemeConfig.textColor6B698E,
+        ),
+        displaySmall: GoogleFonts.roboto(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+        ),
+        bodyMedium: GoogleFonts.roboto(
+          color: ThemeConfig.darkBackColor,
+        ),
+      ),
+);
