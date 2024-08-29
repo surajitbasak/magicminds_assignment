@@ -56,7 +56,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Row(
                       children: [
                         RatingBarIndicator(
-                          rating: 2.75,
+                          rating: widget.item.rating.rate,
                           itemBuilder: (context, index) => const Icon(
                             Icons.star,
                             color: Colors.green,

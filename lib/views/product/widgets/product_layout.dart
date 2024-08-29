@@ -74,7 +74,7 @@ class ProductLayout extends StatelessWidget {
               Row(
                 children: [
                   RatingBarIndicator(
-                    rating: 2.75,
+                    rating: item.rating.rate,
                     itemBuilder: (context, index) => const Icon(
                       Icons.star,
                       color: Colors.green,
