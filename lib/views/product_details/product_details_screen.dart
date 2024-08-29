@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:magicminds_assignment/configs/localization/localization_config.dart';
 import 'package:magicminds_assignment/main.dart';
 import 'package:magicminds_assignment/models/product/product_model.dart';
 import 'package:magicminds_assignment/views/product_details/bloc/product_details_bloc.dart';
@@ -38,7 +40,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                const MyAppBar(title: 'Details', hasBack: true),
+                MyAppBar(title: localization.details, hasBack: true),
                 SizedBox(height: 2.h),
                 Row(
                   children: [

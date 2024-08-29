@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magicminds_assignment/configs/components/my_appbar.dart';
+import 'package:magicminds_assignment/configs/localization/localization_config.dart';
 import 'package:magicminds_assignment/main.dart';
 import 'package:magicminds_assignment/views/product/widgets/my_search_bar.dart';
 import 'package:magicminds_assignment/views/product/widgets/product_layout.dart';
@@ -43,7 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       body: Column(
         children: [
-          const MyAppBar(title: 'Products'),
+          MyAppBar(title: localization.products),
           MySearchBar(
             onSearch: (query) => _productBloc.add(SearchProductEvent(query: query)),
           ),
@@ -56,13 +57,11 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-
                 if (state.products.status == Status.error) {
                   return Center(
                     child: Text(state.products.message!),
                   );
                 }
-
                 if (state.products.status == Status.completed) {
                   return Column(
                     children: [
@@ -75,31 +74,32 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       Visibility(
-                          visible: state.loadMore,
-                          child: Padding(
-                            padding: EdgeInsets.all(1.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 2.h,
-                                  width: 2.h,
-                                  child: const CircularProgressIndicator(
-                                    strokeWidth: 1,
-                                  ),
+                        visible: state.loadMore,
+                        child: Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 2.h,
+                                width: 2.h,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 1,
                                 ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                const Text('Loading...'),
-                              ],
-                            ),
-                          ))
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(localization.loading),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   );
                 }
-                return const Center(
-                  child: Text('Product Screen'),
+                return Center(
+                  child: Text(localization.productScreen),
                 );
               },
             ),

@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:magicminds_assignment/data/network/base_api_services.dart';
 
+import '../../configs/localization/localization_config.dart';
 import '../exception/app_exceptions.dart';
 
 /// Class for handling network API requests.
@@ -85,7 +86,7 @@ class NetworkApiService implements BaseApiServices {
       case 404:
         throw NotFoundException(response.body.toString());
       default:
-        throw FetchDataException('Error occured while communicating with server');
+        throw FetchDataException(localization.errorOccurredWhileCommunicatingWithServer);
     }
   }
 }
