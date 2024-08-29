@@ -30,4 +30,19 @@ class LocalStorage {
     await storage.delete(key: key);
     return true;
   }
+
+  /// Sets the selected app language in the local storage.
+  ///
+  /// Returns a Future<bool> indicating the success of the operation.
+  Future<bool> setLanguage(String languageCode) async {
+    await storage.write(key: 'languageCode', value: languageCode);
+    return true;
+  }
+
+  /// Reads the selected app language from the local storage.
+  ///
+  /// Returns a Future<String?> representing the language code stored.
+  Future<String> readLanguage() async {
+    return await storage.read(key: 'languageCode') ?? 'en';
+  }
 }

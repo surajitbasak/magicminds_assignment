@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:magicminds_assignment/configs/color/color.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../configs/localization/localization_config.dart';
+
 class MySearchBar extends StatelessWidget {
   const MySearchBar({super.key, required this.onSearch});
 
@@ -27,9 +29,9 @@ class MySearchBar extends StatelessWidget {
             Expanded(
               child: TextField(
                 onChanged: onSearch,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Search',
+                  hintText: localization.search,
                 ),
               ),
             ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magicminds_assignment/configs/color/color.dart';
+import 'package:magicminds_assignment/configs/localization/bloc/localization_bloc.dart';
 import 'package:sizer/sizer.dart';
+
+import '../localization/localization_config.dart';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({super.key, required this.title, this.hasBack = false});
@@ -39,7 +43,42 @@ class MyAppBar extends StatelessWidget {
                     ),
               ),
             ),
-            const Expanded(child: SizedBox.shrink()),
+            Expanded(
+              child: BlocBuilder<LocalizationBloc, LocalizationState>(
+                builder: (context, state) {
+                  return DropdownButton<String>(
+                    focusColor: Colors.transparent,
+                    isExpanded: true,
+                    underline: const SizedBox(),
+                    style: TextStyle(
+                      color: AppColors.blackColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                      fontFamily: GoogleFonts.inter().fontFamily,
+                    ),
+                    onChanged: (value) {
+                      context.read<LocalizationBloc>().add(ChangeLanguageEvent(language: getLanguageCode(value!)));
+                    },
+                    value: getLanguage(state.locale.languageCode),
+                    dropdownColor: AppColors.whiteColor,
+                    items: appLanguages
+                        .map(
+                          (e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(
+                              e,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontFamily: GoogleFonts.inter().fontFamily,
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
