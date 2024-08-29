@@ -8,9 +8,14 @@ class Routes {
     switch (settings.name) {
       case RoutesName.product:
         return MaterialPageRoute(builder: (BuildContext context) => const ProductScreen());
-
       case RoutesName.productDetails:
-        return MaterialPageRoute(builder: (BuildContext context) => const ProductDetailsScreen());
+        var data = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (BuildContext context) => ProductDetailsScreen(
+            item: data['productItem'],
+            isFav: data['isFav'] ,
+          ),
+        );
 
       default:
         return MaterialPageRoute(builder: (_) {

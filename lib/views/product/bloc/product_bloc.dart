@@ -14,20 +14,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc({required this.productApiRepository}) : super(ProductState(products: ApiResponse.loading())) {
     on<GetProductsEvent>(_getProducts);
     on<GetMoreProductsEvent>(_getMoreProducts);
+    on<SearchProductEvent>(_searchProducts);
   }
 
-  FutureOr<void> _getProducts(GetProductsEvent event, Emitter<ProductState> emit)async {
+  FutureOr<void> _getProducts(GetProductsEvent event, Emitter<ProductState> emit) async {
     await productApiRepository
         .productApi(event.limit)
-        .then((value) => emit(ProductState(products: ApiResponse.completed(value))))
+        .then((value) => emit(ProductState(products: ApiResponse.completed(value), fullProducts: value)))
         .onError((error, stackTrace) => emit(ProductState(products: ApiResponse.error(error.toString()))));
   }
 
-  FutureOr<void> _getMoreProducts(GetMoreProductsEvent event, Emitter<ProductState> emit)async {
+  FutureOr<void> _getMoreProducts(GetMoreProductsEvent event, Emitter<ProductState> emit) async {
     emit(state.copyWith(loadMore: true));
     await productApiRepository
         .productApi(state.limit + event.limit)
-        .then((value) => emit(state.copyWith(products: ApiResponse.completed(value), loadMore: false)))
+        .then((value) => emit(state.copyWith(products: ApiResponse.completed(value), loadMore: false, fullProducts: value)))
         .onError((error, stackTrace) => emit(ProductState(products: ApiResponse.error(error.toString()), loadMore: false)));
+  }
+
+  FutureOr<void> _searchProducts(SearchProductEvent event, Emitter<ProductState> emit) {
+    List<ProductModel> products = state.fullProducts;
+    List<ProductModel> filterProducts = products;
+    if (event.query.isNotEmpty) {
+      filterProducts = products.where((element) => element.title.toLowerCase().contains(event.query.toLowerCase())).toList();
+    }
+    emit(state.copyWith(products: ApiResponse.completed(filterProducts)));
   }
 }
