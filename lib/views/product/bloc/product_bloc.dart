@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:magicminds_assignment/data/response/api_response.dart';
 import 'package:magicminds_assignment/models/product/product_model.dart';
-import 'package:magicminds_assignment/repository/product_api/auth_repository.dart';
+import 'package:magicminds_assignment/repository/product_api/product_repository.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

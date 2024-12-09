@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magicminds_assignment/configs/localization/localization_config.dart';
 import 'package:magicminds_assignment/views/product/product_screen.dart';
 import 'package:magicminds_assignment/views/product_details/product_details_screen.dart';
 import 'routes_name.dart';
@@ -19,9 +20,9 @@ class Routes {
 
       default:
         return MaterialPageRoute(builder: (_) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text('No route defined'),
+              child: Text(localization.noRouteDefined),
             ),
           );
         });

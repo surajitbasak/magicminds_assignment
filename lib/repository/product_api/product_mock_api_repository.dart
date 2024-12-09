@@ -6,7 +6,7 @@ import 'product_api_repository.dart';
 /// Mock implementation of [ProductApiRepository] for simulating product requests.
 class ProductMockApiRepository implements ProductApiRepository {
   @override
-  Future<List<ProductModel>> productApi(dynamic data) async {
+  Future<List<ProductModel>> productApi(int limit) async {
     // Simulate a delay to mimic network latency
     await Future.delayed(const Duration(seconds: 2));
     // Mock response data
